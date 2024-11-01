@@ -13,7 +13,7 @@
             --bg-color: #f3f4f6;
             /* Light background */
             --text-color: #333333;
-            /* Dark text color */
+            /* Dark text color */ 
             --panel-bg-color: rgba(255, 255, 255, 0.9);
             /* Light panel background */
             --button-bg-color: #ffffff;
@@ -124,6 +124,10 @@
             /* Dark button border color */
         }
 
+        body.dark-mode #clock {
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff; /* Glow effect for dark mode */
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             #clock {
@@ -184,6 +188,8 @@
     </div>
 
     <script>
+        // Initialize with dark mode by default
+        let isDarkMode = true; // Default to dark mode
         let is24HourFormat = localStorage.getItem('is24HourFormat') === 'true' || false;
         let selectedTheme = localStorage.getItem('themeColor') || '#00ffff';
         let selectedTimezone = localStorage.getItem('timezone') || 'local';
@@ -191,6 +197,11 @@
         document.documentElement.style.setProperty('--clock-color', selectedTheme);
         document.getElementById('theme-selector').value = selectedTheme;
         document.getElementById('timezone-selector').value = selectedTimezone;
+
+        // Apply dark mode if set
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+        }
 
         function updateClock() {
             const now = new Date();
